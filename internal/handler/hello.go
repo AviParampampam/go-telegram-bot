@@ -10,7 +10,7 @@ import (
 var helloMessages = []string{
 	"hello", "hi", "привет", "hola", "hey", "здарова", "здравствуй", "здравствуйте", "алоха",
 	"здравия желанию", "добрый день", "добрый вечер", "доброе утро", "ку", "прив", "хеллоу", "дароу",
-	"bonjour", "банжур", "бонжур", "приветствую",
+	"bonjour", "банжур", "бонжур", "приветствую", "re",
 }
 
 func isHello(msgText string) bool {
@@ -25,7 +25,10 @@ func isHello(msgText string) bool {
 func (h *Handler) helloResponse(update tgbotapi.Update) {
 	resMsg := helloMessages[rand.Intn(len(helloMessages))]
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, strings.Title(resMsg))
-	// msg.ReplyToMessageID = update.Message.MessageID
+
+	if len(*h.UpdatesChannel) > 0 {
+		msg.ReplyToMessageID = update.Message.MessageID
+	}
 
 	h.Bot.Send(msg)
 }

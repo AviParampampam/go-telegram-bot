@@ -1,7 +1,6 @@
 package bot
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/AviParampampam/go-telegram-bot/internal/handler"
@@ -39,10 +38,10 @@ func (b *Bot) Listen() error {
 	if err != nil {
 		return err
 	}
+	b.handler.UpdatesChannel = &updates
 
 	// Начинаем прослушивание канала
 	for update := range updates {
-		fmt.Println(len(updates))
 		if update.Message == nil { // игнорировать если нет обновлений
 			continue
 		}

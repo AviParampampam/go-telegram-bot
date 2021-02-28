@@ -9,7 +9,8 @@ import (
 
 // Handler ..
 type Handler struct {
-	Bot *tgbotapi.BotAPI
+	Bot            *tgbotapi.BotAPI
+	UpdatesChannel *tgbotapi.UpdatesChannel
 }
 
 // HandleUpdate ..

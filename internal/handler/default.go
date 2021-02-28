@@ -14,5 +14,10 @@ var defaultMessages = []string{
 func (h *Handler) defaultResponse(update tgbotapi.Update) {
 	resMsg := defaultMessages[rand.Intn(len(defaultMessages))]
 	msg := tgbotapi.NewMessage(update.Message.Chat.ID, resMsg)
+
+	if len(*h.UpdatesChannel) > 0 {
+		msg.ReplyToMessageID = update.Message.MessageID
+	}
+
 	h.Bot.Send(msg)
 }
